@@ -1,11 +1,11 @@
 malloc: library
 	gcc main.c -L. -l malloc -o malloc
 	
-library: malloc.o
-	ar rcs libmalloc.a malloc.o
+library: mymalloc.o
+	ar rcs libmalloc.a mymalloc.o
 	
-malloc.o:
-	gcc -c malloc.c -o malloc.o
+mymalloc.o:
+	gcc -c mymalloc.c -o mymalloc.o
 
 clean: 
 	rm *.a

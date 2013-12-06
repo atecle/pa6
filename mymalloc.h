@@ -6,8 +6,8 @@
 //
 //
 
-#ifndef _malloc_h
-#define _malloc_h
+#ifndef _mymalloc_h
+#define _mymalloc_h
 
 #include	<unistd.h>
 #include	<stdio.h>
