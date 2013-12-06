@@ -12,7 +12,7 @@
 
 int main(int argc, char **argv) {
     
-    int x;
+    int x = 32;
     malloc(x);
     free(x);
     
