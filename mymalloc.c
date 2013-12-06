@@ -76,13 +76,16 @@ my_malloc( unsigned int size )
 void
 my_free( void * p )
 {
+    printf("FREE\n");
 	struct MemEntry *		ptr;
 	struct MemEntry *		pred;
 	struct MemEntry *		succ;
     
+    printf("FUCK");
 	ptr = (struct MemEntry *)((char *)p - sizeof(struct MemEntry));
 	if ( (pred = ptr->prev) != 0 && pred->isfree )
 	{
+        printf("FUCKING SHIT\n");
 		pred->size += sizeof(struct MemEntry) + ptr->size;	// merge with predecessor
 		
 		pred->succ = ptr->succ;
@@ -96,6 +99,7 @@ my_free( void * p )
 	}
 	else
 	{
+        printf("FUCKING BULLSHIT\n");
 		printf( "BKR freeing block %#x.\n", p );
 		ptr->isfree = 1;
 		pred = ptr;

@@ -21,8 +21,8 @@ int main(int argc, char **argv) {
     
     printf("%s\n", str);
     free(str);
-    printf("tesT\n");
-    free(x);
+    //printf("tesT\n");
+   // free(x);
     
     return 1;
 }
