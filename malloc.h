@@ -9,22 +9,23 @@
 #ifndef _malloc_h
 #define _malloc_h
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <string.h>
-#include <errno.h>
+#include	<unistd.h>
+#include	<stdio.h>
+#include	<string.h>
+#include	<errno.h>
 
-typedef struct MemEntry MemEntry;
 
 struct MemEntry {
     
+    struct MemEntry *prev;
+    struct MemEntry *succ;
+    unsigned int size;
+    int isfree;
     
 };
 
 void *my_malloc(unsigned int size);
-void *my_free(unsigned int size);
+void my_free(void *ptr);
 
 
 #endif

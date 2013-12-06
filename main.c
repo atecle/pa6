@@ -8,13 +8,10 @@
 
 #include "malloc.h"
 #define malloc(x) my_malloc(x)
-#define free(x) my_free(x)
+#define free(ptr) my_free(ptr)
 
 int main(int argc, char **argv) {
     
-    int x;
-    malloc(x);
-    free(x);
     
     return 1;
 }
