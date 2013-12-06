@@ -21,6 +21,7 @@ struct MemEntry {
     struct MemEntry *succ;
     unsigned int size;
     int isfree;
+    unsigned char *buffer;
     
 };
 

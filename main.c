@@ -16,6 +16,13 @@ int main(int argc, char **argv) {
     int x = (int)malloc(sizeof(int));
     x = 0;
     printf("%d\n", x);
+    char *str = (char*)malloc(sizeof(char) * 100);
+    str = argv[1];
+    
+    printf("%s\n", str);
+    free(str);
+    printf("tesT\n");
+    free(x);
     
     return 1;
 }
