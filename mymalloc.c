@@ -1,7 +1,4 @@
-
-
-#include "mymalloc.h"
-
+#include	"mymalloc.h"
 
 // Full-scale malloc() implementation using sbrk().
 
@@ -34,7 +31,11 @@ my_malloc( unsigned int size )
 			succ = (struct MemEntry *)((char *)p + sizeof(struct MemEntry) + size);
 			succ->prev = p;
 			succ->succ = p->succ;
-			p->succ->prev = succ;
+			//p->succ->prev = succ;
+			//begin add
+			if(p->succ != 0)
+				p->succ->prev = succ;
+			//end add
 			p->succ = succ;
 			succ->size = p->size - sizeof(struct MemEntry) - size;
 			succ->isfree = 1;
@@ -79,12 +80,18 @@ my_free( void * p )
 	struct MemEntry *		pred;
 	struct MemEntry *		succ;
     
-
 	ptr = (struct MemEntry *)((char *)p - sizeof(struct MemEntry));
 	if ( (pred = ptr->prev) != 0 && pred->isfree )
 	{
 		pred->size += sizeof(struct MemEntry) + ptr->size;	// merge with predecessor
+		
 		pred->succ = ptr->succ;
+		//begin added
+		ptr->isfree=1;
+		pred->succ = ptr->succ;
+		if(ptr->succ != 0)
+			ptr->succ->prev = pred;
+		//end added
 		printf( "BKR freeing block %#x merging with predecessor new size is %d.\n", p, pred->size );
 	}
 	else
@@ -97,8 +104,12 @@ my_free( void * p )
 	{
 		pred->size += sizeof(struct MemEntry) + succ->size;	// merge with successor
 		pred->succ = succ->succ;
+		//begin added
+		pred->isfree = 1;
+        
+		if(succ->succ != 0)
+			succ->succ->prev=pred;
+		//end added
 		printf( "BKR freeing block %#x merging with successor new size is %d.\n", p, pred->size );
 	}
-
-
 }
