@@ -6,7 +6,7 @@
 //
 //
 
-#include "malloc.h"
+#include "mymalloc.h"
 #define malloc(x) my_malloc(x)
 #define free(x) my_free(x)
 
