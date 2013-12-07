@@ -12,14 +12,24 @@
 
 int main(int argc, char **argv) {
     
+    if (argc != 2) {
+        printf("fuck you\n");
+        return 0;
+    }
     
-    int x = (int)malloc(sizeof(int));
-    printf("%d\n", x);
-    char *str = (char*)malloc(sizeof(char) * strlen(argv[1]));
-    str = argv[1];
+    printf("mallocing and freeing int\n");
+    
+    int *x = malloc(sizeof(int) * 30);
+    int y = 50;
+    x = &y;
+    free(&x);
+    
+    printf("mallocing and freeing string\n");
+    char *str = malloc(sizeof(char) *strlen(argv[1]));
+    strcpy(str, argv[1]);
     free(str);
-    printf("tesT\n");
-    free(x);
+    printf("\n");
+    
     
     return 1;
 }
