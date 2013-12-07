@@ -15,10 +15,11 @@ int main(int argc, char **argv) {
     
     int x = (int)malloc(sizeof(int));
     printf("%d\n", x);
-    char *str = (char*)malloc(sizeof(char) * 100);
+    char *str = (char*)malloc(sizeof(char) * strlen(argv[1]));
+    str = argv[1];
     free(str);
     printf("tesT\n");
-    //free(&x);
+    free(x);
     
     return 1;
 }

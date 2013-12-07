@@ -100,16 +100,4 @@ my_free( void * p )
 		ptr->isfree = 1;
 		pred = ptr;
 	}
-	if ( (succ = ptr->succ) != 0 && succ->isfree )
-	{
-		pred->size += sizeof(struct MemEntry) + succ->size;	// merge with successor
-		pred->succ = succ->succ;
-		//begin added
-		pred->isfree = 1;
-        
-		if(succ->succ != 0)
-			succ->succ->prev=pred;
-		//end added
-		printf( "BKR freeing block %#x merging with successor new size is %d.\n", p, pred->size );
-	}
 }
