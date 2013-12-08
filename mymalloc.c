@@ -85,8 +85,11 @@ my_free( void * p )
 	struct MemEntry *		succ;
     
 	ptr = (struct MemEntry *)((char *)p - sizeof(struct MemEntry));
+    printf("23sdf\n");
 	if ( (pred = ptr->prev) != 0 && pred->isfree )
 	{
+        printf("test2\n");
+        
 		pred->size += sizeof(struct MemEntry) + ptr->size;	// merge with predecessor
 		
 		pred->succ = ptr->succ;
@@ -100,6 +103,7 @@ my_free( void * p )
 	}
 	else
 	{
+        printf("test1\n");
 		printf( "BKR freeing block %#x.\n", p );
 		ptr->isfree = 1;
 		pred = ptr;
