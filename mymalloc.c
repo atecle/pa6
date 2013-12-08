@@ -17,6 +17,11 @@ my_malloc( unsigned int size )
 	struct MemEntry *		succ;
     
 	p = root;
+
+	if(p==0){
+		printf("root is 0\n");
+	}
+
 	while ( p != 0 )
 	{
 		if ( p->size < size )
@@ -76,6 +81,11 @@ my_malloc( unsigned int size )
 		last = p;
 		return (char *)p + sizeof(struct MemEntry);
 	}
+
+	if(root != 0){
+		printf("ASDFASDFASSDFASDF\n");
+	}
+
 	return 0;
 }
 
