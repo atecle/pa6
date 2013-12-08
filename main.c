@@ -12,19 +12,9 @@
 
 int main(int argc, char **argv) {
     
-    printf("sdfsdf\n");
-    struct MemEntry *test;
-    test->size = 5;
-    struct MemEntry *test1;
-    test1->size = 100;
-    printf("Size 1: %d \t Size 2: %d \n", sizeof(test), sizeof(test1));
-    
-    
-    printf("mallocing and freeing string\n");
-    char *str = malloc(sizeof(char) *strlen(argv[1]));
-    strcpy(str, argv[1]);
-    free(str);
-    printf("\n");
+  
+    int x;
+    free(&x);
     
     
     return 1;

@@ -14,7 +14,7 @@
 #include	<string.h>
 #include	<errno.h>
 
-
+typedef struct MemEntry MemEntry;
 
 struct MemEntry {
     
@@ -22,8 +22,6 @@ struct MemEntry {
     struct MemEntry *succ;
     unsigned int size;
     int isfree;
-    unsigned char *buffer;
-    
 };
 
 void *my_malloc(unsigned int size);
