@@ -85,6 +85,16 @@ my_free( void * p )
 	struct MemEntry *		succ;
     
 	ptr = (struct MemEntry *)((char *)p - sizeof(struct MemEntry));
+
+	struct sigaction sa;
+
+	memset(&sa, 0, sizeof(struct sigaction));
+	sigemptyset(&sa.sa_mask);
+	sa.sa_sigaction=segfault_sigaction;
+	sa.sa_flags = SA_SIGINFO;
+
+	(sigaction(SIGSEGV, &sa, NULL);
+
 	if ( (pred = ptr->prev) != 0 && pred->isfree )
 	{
 		pred->size += sizeof(struct MemEntry) + ptr->size;	// merge with predecessor
@@ -113,7 +123,10 @@ my_free( void * p )
         
 		if(succ->succ != 0)
 			succ->succ->prev=pred;
-		//end added
-		printf( "BKR freeing block %#x merging with successor new size is %d.\n", p, pred->size );
+		//end addedw		printf( "BKR freeing block %#x merging with successor new size is %d.\n", p, pred->size );
 	}
+}
+
+void segfault_sigaction(int signal, siginfo_t *si, void *arg){
+	printf("You did not malloc\n");
 }

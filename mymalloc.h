@@ -5,6 +5,8 @@
 //  Created by Adam on 12/5/13.
 //
 //
+//
+//
 
 #ifndef _mymalloc_h
 #define _mymalloc_h
@@ -13,6 +15,7 @@
 #include	<stdio.h>
 #include	<string.h>
 #include	<errno.h>
+#include 	<signal.h>
 
 typedef struct MemEntry MemEntry;
 
@@ -26,6 +29,7 @@ struct MemEntry {
 
 void *my_malloc(unsigned int size);
 void my_free(void *ptr);
+void segfault_sigaction(int signal, siginfo_t *si, void *arg);
 
 
 #endif

@@ -1,5 +1,5 @@
 malloc: library
-	gcc main.c -L. -l malloc -o malloc
+	gcc -g main.c -L. -l malloc -o malloc
 	
 library: mymalloc.o
 	ar rcs libmalloc.a mymalloc.o
