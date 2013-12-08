@@ -6,11 +6,13 @@
 
 // Full-scale malloc() implementation using sbrk().
 
+static struct MemEntry *	root = 0;
+static struct MemEntry *	last = 0;
+
 void *
 my_malloc( unsigned int size )
 {
-	static struct MemEntry *	root = 0;
-	static struct MemEntry *	last = 0;
+
 	struct MemEntry *		p;
 	struct MemEntry *		succ;
     
@@ -80,6 +82,14 @@ my_malloc( unsigned int size )
 void
 my_free( void * p )
 {
+  
+    if (root == 0) {
+        printf("TRUE\n");
+    }
+    else {
+        printf("false\n");
+    }
+    
 	struct MemEntry *		ptr;
 	struct MemEntry *		pred;
 	struct MemEntry *		succ;

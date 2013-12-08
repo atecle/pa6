@@ -12,14 +12,10 @@
 
 int main(int argc, char **argv) {
     
-  
-    int *x;
-    //x = malloc(sizeof(int));
+    
+    int *x = malloc(sizeof(int));
+    
     free(x);
-
-    int *y;
-    //y = malloc(4);
-    //free(y);
     
     return 1;
 }
