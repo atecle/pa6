@@ -12,14 +12,13 @@
 
 int main(int argc, char **argv) {
     
-
+    printf("sdfsdf\n");
+    struct MemEntry *test;
+    test->size = 5;
+    struct MemEntry *test1;
+    test1->size = 100;
+    printf("Size 1: %d \t Size 2: %d \n", sizeof(test), sizeof(test1));
     
-    printf("mallocing and freeing int\n");
-    
-    int *x = malloc(sizeof(int) * 30);
-    int y = 50;
-    x = &y;
-    free(&x); //if i don't use & it segfaults, don't know  why. don't have to do it for string;
     
     printf("mallocing and freeing string\n");
     char *str = malloc(sizeof(char) *strlen(argv[1]));

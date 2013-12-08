@@ -12,6 +12,7 @@ my_malloc( unsigned int size )
 	struct MemEntry *		succ;
     
 	p = root;
+    
 	while ( p != 0 )
 	{
 		if ( p->size < size )
