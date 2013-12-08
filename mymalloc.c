@@ -93,10 +93,11 @@ my_free( void * p )
 	sa.sa_sigaction=segfault_sigaction;
 	sa.sa_flags = SA_SIGINFO;
 
-	(sigaction(SIGSEGV, &sa, NULL);
+	sigaction(SIGSEGV, &sa, NULL);
 
 	if ( (pred = ptr->prev) != 0 && pred->isfree )
 	{
+        
 		pred->size += sizeof(struct MemEntry) + ptr->size;	// merge with predecessor
 		
 		pred->succ = ptr->succ;
@@ -110,6 +111,7 @@ my_free( void * p )
 	}
 	else
 	{
+        printf("test1\n");
 		printf( "BKR freeing block %#x.\n", p );
 		ptr->isfree = 1;
 		pred = ptr;
@@ -123,7 +125,8 @@ my_free( void * p )
         
 		if(succ->succ != 0)
 			succ->succ->prev=pred;
-		//end addedw		printf( "BKR freeing block %#x merging with successor new size is %d.\n", p, pred->size );
+		//end addedw		
+		printf( "BKR freeing block %#x merging with successor new size is %d.\n", p, pred->size );
 	}
 }
 
