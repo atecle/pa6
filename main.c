@@ -19,7 +19,7 @@ int main(int argc, char **argv) {
     int *x = malloc(sizeof(int) * 30);
     int y = 50;
     x = &y;
-    free(&x);
+    free(&x); //if i don't use & it segfaults, don't know  why. don't have to do it for string;
     
     printf("mallocing and freeing string\n");
     char *str = malloc(sizeof(char) *strlen(argv[1]));

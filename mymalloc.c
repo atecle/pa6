@@ -2,6 +2,7 @@
 
 // Full-scale malloc() implementation using sbrk().
 
+static unsigned char buffer[5000];
 void *
 my_malloc( unsigned int size )
 {

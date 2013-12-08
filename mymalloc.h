@@ -14,6 +14,8 @@
 #include	<string.h>
 #include	<errno.h>
 
+typedef struct MemEntry MemEntry;
+
 
 struct MemEntry {
     
