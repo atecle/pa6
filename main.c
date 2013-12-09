@@ -14,10 +14,12 @@ int main(int argc, char **argv) {
     
     
     int *x = malloc(sizeof(int));
-    
-    free(x);
 
     int *y=malloc(sizeof(int));
     
+    free(y);
+
+    free(x);
+
     return 1;
 }

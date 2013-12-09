@@ -85,19 +85,16 @@ my_malloc( unsigned int size )
 void
 my_free( void * p )
 {
-  
-    if (root == 0) {
-        printf("TRUE\n");
-    }
-    else {
-        printf("false\n");
-    }
+
+	printf("ROOT ADDR: %#x\n", root);
     
 	struct MemEntry *		ptr;
 	struct MemEntry *		pred;
 	struct MemEntry *		succ;
     
 	ptr = (struct MemEntry *)((char *)p - sizeof(struct MemEntry));
+
+	printf("PTR ADDR: %#x\n", ptr);
 
 	if ( (pred = ptr->prev) != 0 && pred->isfree )
 	{
