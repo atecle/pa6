@@ -85,8 +85,6 @@ my_malloc( unsigned int size )
 void
 my_free( void * p )
 {
-
-
     
     struct MemEntry *		ptr;
     struct MemEntry *		pred;
@@ -103,6 +101,7 @@ my_free( void * p )
         root = root->succ;
 	if(root == 0){
 		printf("You did not malloc this before\n");
+		root = temp;
 		return;
 	}
     }

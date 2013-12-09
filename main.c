@@ -23,5 +23,10 @@ int main(int argc, char **argv) {
     int *s;
     free(s);
 
+    int *t = malloc(sizeof(int));
+    free(t);
+
+    free(y);
+
     return 1;
 }
