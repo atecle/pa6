@@ -18,9 +18,6 @@ my_malloc( unsigned int size )
     
 	p = root;
 
-	if(p==0){
-		printf("root is 0\n");
-	}
 
 	while ( p != 0 )
 	{
@@ -82,10 +79,6 @@ my_malloc( unsigned int size )
 		return (char *)p + sizeof(struct MemEntry);
 	}
 
-	if(root != 0){
-		printf("ASDFASDFASSDFASDF\n");
-	}
-
 	return 0;
 }
 
@@ -105,15 +98,6 @@ my_free( void * p )
 	struct MemEntry *		succ;
     
 	ptr = (struct MemEntry *)((char *)p - sizeof(struct MemEntry));
-
-	struct sigaction sa;
-
-	memset(&sa, 0, sizeof(struct sigaction));
-	sigemptyset(&sa.sa_mask);
-	sa.sa_sigaction=segfault_sigaction;
-	sa.sa_flags = SA_SIGINFO;
-
-	sigaction(SIGSEGV, &sa, NULL);
 
 	if ( (pred = ptr->prev) != 0 && pred->isfree )
 	{
@@ -150,6 +134,3 @@ my_free( void * p )
 	}
 }
 
-void segfault_sigaction(int signal, siginfo_t *si, void *arg){
-	printf("You did not malloc\n");
-}
