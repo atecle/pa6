@@ -37,7 +37,7 @@ my_malloc( unsigned int size )
 		else if ( p->size < (size + sizeof(struct MemEntry)) )
 		{
 			p->isfree = 0;					// too small to chop up
-			remove(p);
+			remove_from_arr(p);
 			return (char *)p + sizeof(struct MemEntry);
 		}
 		else
@@ -56,7 +56,7 @@ my_malloc( unsigned int size )
 			p->size = size;
 			p->isfree = 0;
 			last = (p == last) ? succ : last;
-			remove(p);
+			remove_from_arr(p);
 			return (char *)p + sizeof(struct MemEntry);
 		}
 	}
