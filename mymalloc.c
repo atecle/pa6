@@ -8,20 +8,20 @@
 
 static struct MemEntry *	root = 0;
 static struct MemEntry *	last = 0;
-unsigned int arr[5000];
+void * arr[5000];
 static int i = 0;
 
 
 void *
 my_malloc( unsigned int size )
 {
-
+    
 	struct MemEntry *		p;
 	struct MemEntry *		succ;
     
 	p = root;
-
-
+    
+    
 	while ( p != 0 )
 	{
 		if ( p->size < size )
@@ -54,9 +54,9 @@ my_malloc( unsigned int size )
 			p->size = size;
 			p->isfree = 0;
 			last = (p == last) ? succ : last;
-
+            
 			//printf("PRINT %#x\n", (char *)p + sizeof(struct MemEntry));
-
+            
 			return (char *)p + sizeof(struct MemEntry);
 		}
 	}
@@ -85,7 +85,7 @@ my_malloc( unsigned int size )
 		last = p;
 		return (char *)p + sizeof(struct MemEntry);
 	}
-
+    
 	return 0;
 }
 
@@ -98,7 +98,7 @@ my_free( void * p )
     struct MemEntry *		succ;
     
     ptr = (struct MemEntry *)((char *)p - sizeof(struct MemEntry));
-
+    
     struct MemEntry *temp = root;
     
     while (root != 0) {
@@ -106,27 +106,25 @@ my_free( void * p )
             break;
         }
         root = root->succ;
-	if(root == 0){
-		printf("ERROR, Has not been malloc or freed already\n");
-		root = temp;
-		return;
-	}
+        if(root == 0){
+            printf("<ERROR>: Has not been malloc or freed already\n");
+            root = temp;
+            return;
+        }
     }
-
+    
     root = temp;
     
     int j;
     for (j = 0; j < i; j++) {
-        
-        if ((int)ptr == arr[j]) {
-            printf("ERROR, Has not been malloc or freed already\n");
+        if (p == arr[j]) {
+            printf("<ERROR>: You already freed this memory.\n");
             return;
         }
+        
     }
-    if (root == ptr) {
-        printf("fuck yeah\n");
-    }
-
+    arr[i++] = p;
+    
 	if ( (pred = ptr->prev) != 0 && pred->isfree )
 	{
         
@@ -145,7 +143,6 @@ my_free( void * p )
 	{
         printf("test1\n");
 		printf( "BKR freeing block %#x.\n", p );
-        arr[i++] = (int)ptr;
 		ptr->isfree = 1;
 		pred = ptr;
 	}
@@ -158,9 +155,8 @@ my_free( void * p )
         
 		if(succ->succ != 0)
 			succ->succ->prev=pred;
-		//end addedw		
+		//end added
 		printf( "BKR freeing block %#x merging with successor new size is %d.\n", p, pred->size );
-        arr[i++] = (int)ptr;
         printf("shaving off last two %#x\n", arr[(i-1)]);
         
 	}
