@@ -17,9 +17,11 @@ int main(int argc, char **argv) {
 
     int *y=malloc(sizeof(int));
     
-    free(y);
-
     free(x);
+    free(y);
+    
+    int s;
+    free(&s);
 
     return 1;
 }

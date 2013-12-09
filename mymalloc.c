@@ -86,7 +86,7 @@ void
 my_free( void * p )
 {
 
-	printf("ROOT ADDR: %#x\n", root);
+
     
 	struct MemEntry *		ptr;
 	struct MemEntry *		pred;
@@ -94,7 +94,19 @@ my_free( void * p )
     
 	ptr = (struct MemEntry *)((char *)p - sizeof(struct MemEntry));
 
-	printf("PTR ADDR: %#x\n", ptr);
+    struct MemEntry *temp = root;
+    
+    while (temp != 0) {
+        if (p == temp) {
+            printf("You did not malloc.\n");
+            return;
+        }
+        temp = temp->succ;
+    }
+    
+    if (root == ptr) {
+        printf("fuck yeah\n");
+    }
 
 	if ( (pred = ptr->prev) != 0 && pred->isfree )
 	{
