@@ -26,7 +26,7 @@ my_malloc( unsigned int size )
 	{
 		if ( p->size < size )
 		{
-			p = p->succ;					// too small
+			p = p->succ;// too small
 		}
 		else if ( !p->isfree )
 		{

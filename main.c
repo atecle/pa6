@@ -20,6 +20,8 @@ int main(int argc, char **argv) {
     free(y);
     free(x);
     
+    printf("------------------------------------\n");
+
     int *t = malloc(sizeof(int));
 
     //free(x);
