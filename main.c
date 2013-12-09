@@ -27,6 +27,7 @@ int main(int argc, char **argv) {
     free(t);
 
     free(y);
+    free(x);
 
     return 1;
 }
