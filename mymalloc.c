@@ -16,6 +16,8 @@ void *
 my_malloc( unsigned int size )
 {
     
+   
+    
 	struct MemEntry *		p;
 	struct MemEntry *		succ;
     
@@ -35,7 +37,8 @@ my_malloc( unsigned int size )
 		else if ( p->size < (size + sizeof(struct MemEntry)) )
 		{
 			p->isfree = 0;					// too small to chop up
-			printf("PRINT %#x\n", (char *)p + sizeof(struct MemEntry));
+			//printf("PRINT %#x\n", (char *)p + sizeof(struct MemEntry));
+             printf("shit1\n");
 			return (char *)p + sizeof(struct MemEntry);
 		}
 		else
@@ -56,12 +59,13 @@ my_malloc( unsigned int size )
 			last = (p == last) ? succ : last;
             
 			//printf("PRINT %#x\n", (char *)p + sizeof(struct MemEntry));
-            
+             printf("shit2\n");
 			return (char *)p + sizeof(struct MemEntry);
 		}
 	}
 	if ( (p = (struct MemEntry *)sbrk( sizeof(struct MemEntry) + size )) == (void *)-1 )
 	{
+         printf("shit3\n");
 		return 0;
 	}
 	else if ( last == 0 )				// first block created
@@ -72,6 +76,7 @@ my_malloc( unsigned int size )
 		p->size = size;
 		p->isfree = 0;
 		root = last = p;
+         printf("shit4\n");
 		return (char *)p + sizeof(struct MemEntry);
 	}
 	else						// other blocks appended
@@ -83,9 +88,10 @@ my_malloc( unsigned int size )
 		p->isfree = 0;
 		last->succ = p;
 		last = p;
+         printf("shit5\n");
 		return (char *)p + sizeof(struct MemEntry);
 	}
-    
+  
 	return 0;
 }
 
@@ -115,7 +121,7 @@ my_free( void * p )
     
     root = temp;
     
-    int j;
+    /*int j;
     for (j = 0; j < i; j++) {
         if (p == arr[j]) {
             printf("<ERROR>: You already freed this memory.\n");
@@ -124,6 +130,7 @@ my_free( void * p )
         
     }
     arr[i++] = p;
+     */
     
 	if ( (pred = ptr->prev) != 0 && pred->isfree )
 	{
@@ -141,7 +148,6 @@ my_free( void * p )
 	}
 	else
 	{
-        printf("test1\n");
 		printf( "BKR freeing block %#x.\n", p );
 		ptr->isfree = 1;
 		pred = ptr;
@@ -157,7 +163,7 @@ my_free( void * p )
 			succ->succ->prev=pred;
 		//end added
 		printf( "BKR freeing block %#x merging with successor new size is %d.\n", p, pred->size );
-        printf("shaving off last two %#x\n", arr[(i-1)]);
+        //printf("shaving off last two %#x\n", arr[(i-1)]);
         
 	}
 }
