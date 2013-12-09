@@ -1,0 +1,111 @@
+Test1
+--------------
+
+INPUT:
+int *x = malloc(sizeof(int));
+free(x);
+
+int y;
+free(&y);
+
+char *t = malloc(sizeof(char*));
+free(t);
+
+EXPECTED OUTPUT:
+
+BKR making first chunk size 4
+BKR freeing block 0xe527018.
+<ERROR>: Has not been malloc or freed already
+BKR making another chunk size 8
+BKR freeing block 0xe527034 merging with predecessor new size is 36.
+
+OUTPUT:
+
+BKR making first chunk size 4
+BKR freeing block 0xe527018.
+<ERROR>: Has not been malloc or freed already
+BKR making another chunk size 8
+BKR freeing block 0xe527034 merging with predecessor new size is 36.
+
+Test2
+-----------------
+
+INPUT:
+int *x = malloc(sizeof(int));
+free(x);
+
+x = malloc(sizeof(int));
+free(x);
+
+EXPECTED OUTPUT:
+
+BKR making first chunk size 4
+BKR freeing block <address>.
+BKR freeing block <address>.
+
+OUTPUT:
+BKR making first chunk size 4
+BKR freeing block <address>.
+BKR freeing block <address>.
+
+Test3
+----------------------
+
+INPUT:
+int *x = malloc(sizeof(int));
+free(x);
+free(x);
+
+EXPECTED OUTPUT:
+
+BKR making first chunk size 4
+BKR freeing block <address>.
+<ERROR>: Has already been freed
+
+OUTPUT:
+BKR making first chunk size 4
+BKR freeing block <address>.
+<ERROR>: Has already been freed
+
+Test4
+------------------
+**granted user enters a string for testing purposes
+
+
+INPUT:
+char *str = malloc(sizeof(char) *strlen(argv[1]));
+strcpy(str, argv[1]);
+free(str);
+
+EXPECTED OUTPUT:
+
+BKR making first chunk size <size>
+BKR freeing block <address>.
+
+OUTPUT:
+BKR making first chunk size <size>
+BKR freeing block <address>.
+
+
+Test5
+—————————
+
+Input: 
+int *x = malloc(sizeof(int));
+free(x);
+
+char *t = malloc(4);
+free(x);
+
+Expected Output
+
+
+BKR making first chunk of size 4.
+BKR freeing block <address>
+<ERROR>: Has already been freed.
+
+OUTPUT: THIS IS AN ERROR IN OUR PROGRAM
+
+BKR making first chunk of size 4.
+BKR freeing block <address>
+BKR freeing block <address>
