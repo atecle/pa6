@@ -14,21 +14,11 @@ int main(int argc, char **argv) {
     
     
     int *x = malloc(sizeof(int));
-
-    int *y = malloc(sizeof(int));
-
-    free(y);
+    free(x);
     free(x);
     
-    printf("------------------------------------\n");
-
-    int *t = malloc(sizeof(int));
-
-    //free(x);
-    free(t);
-
-    //x = malloc(sizeof(int));
-    //free(x);
+    int y;
+    free(&y);
 
     return 1;
 }

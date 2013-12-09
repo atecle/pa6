@@ -3,6 +3,9 @@
 // Full-scale malloc() implementation using sbrk().
 static struct MemEntry *	root = 0;
 static struct MemEntry *	last = 0;
+void *arr[5000];
+static int i = 0;
+
 
 void *
 my_malloc( unsigned int size )
@@ -97,6 +100,14 @@ my_free( void * p )
         }
     }
     
+    int j;
+    for (j = 0; j < i; j++) {
+        if (ptr == arr[j]) {
+            printf("<ERROR>: Has already been freed\n");
+            return;
+        }
+    }
+    
     root = temp;
     
     
@@ -118,6 +129,7 @@ my_free( void * p )
 	else
 	{
 		printf( "BKR freeing block %#x.\n", p );
+        arr[i++] = ptr;
 		ptr->isfree = 1;
 		pred = ptr;
 	}
@@ -131,6 +143,7 @@ my_free( void * p )
 		if(succ->succ != 0)
 			succ->succ->prev=pred;
 		//end added
+        arr[i++] = ptr;
 		printf( "BKR freeing block %#x merging with successor new size is %d.\n", p, pred->size );
 	}
 }
