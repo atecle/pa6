@@ -22,11 +22,11 @@ int main(int argc, char **argv) {
     
     int *t = malloc(sizeof(int));
 
-    free(x);
+    //free(x);
     free(t);
 
-    x = malloc(sizeof(int));
-    free(x);
+    //x = malloc(sizeof(int));
+    //free(x);
 
     return 1;
 }
