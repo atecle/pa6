@@ -8,6 +8,9 @@
 
 static struct MemEntry *	root = 0;
 static struct MemEntry *	last = 0;
+struct MemEntry *    arr[5000];
+static int i = 0;
+
 
 void *
 my_malloc( unsigned int size )
@@ -130,6 +133,7 @@ my_free( void * p )
 	{
         printf("test1\n");
 		printf( "BKR freeing block %#x.\n", p );
+        arr[i++] = ptr;
 		ptr->isfree = 1;
 		pred = ptr;
 	}
@@ -144,6 +148,9 @@ my_free( void * p )
 			succ->succ->prev=pred;
 		//end addedw		
 		printf( "BKR freeing block %#x merging with successor new size is %d.\n", p, pred->size );
+        arr[i++] = ptr;
+        printf("shaving off last two %#x\n", arr[(i-1)]);
+        
 	}
 }
 
