@@ -19,9 +19,9 @@ int main(int argc, char **argv) {
     
     free(x);
     free(y);
-    
-    int s;
-    free(&s);
+
+    int *s;
+    free(s);
 
     return 1;
 }

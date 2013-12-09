@@ -88,21 +88,26 @@ my_free( void * p )
 
 
     
-	struct MemEntry *		ptr;
-	struct MemEntry *		pred;
-	struct MemEntry *		succ;
+    struct MemEntry *		ptr;
+    struct MemEntry *		pred;
+    struct MemEntry *		succ;
     
-	ptr = (struct MemEntry *)((char *)p - sizeof(struct MemEntry));
+    ptr = (struct MemEntry *)((char *)p - sizeof(struct MemEntry));
 
     struct MemEntry *temp = root;
     
-    while (temp != 0) {
-        if (p == temp) {
-            printf("You did not malloc.\n");
-            return;
+    while (root != 0) {
+        if (ptr == root) {
+            break;
         }
-        temp = temp->succ;
+        root = root->succ;
+	if(root == 0){
+		printf("You did not malloc this before\n");
+		return;
+	}
     }
+
+    root = temp;
     
     if (root == ptr) {
         printf("fuck yeah\n");
