@@ -35,6 +35,7 @@ my_malloc( unsigned int size )
 		else if ( p->size < (size + sizeof(struct MemEntry)) )
 		{
 			p->isfree = 0;					// too small to chop up
+			printf("PRINT %#x\n", (char *)p + sizeof(struct MemEntry));
 			return (char *)p + sizeof(struct MemEntry);
 		}
 		else
@@ -53,6 +54,9 @@ my_malloc( unsigned int size )
 			p->size = size;
 			p->isfree = 0;
 			last = (p == last) ? succ : last;
+
+			//printf("PRINT %#x\n", (char *)p + sizeof(struct MemEntry));
+
 			return (char *)p + sizeof(struct MemEntry);
 		}
 	}
@@ -103,7 +107,7 @@ my_free( void * p )
         }
         root = root->succ;
 	if(root == 0){
-		printf("You did not malloc this before\n");
+		printf("ERROR, Has not been malloc or freed already\n");
 		root = temp;
 		return;
 	}
@@ -115,7 +119,7 @@ my_free( void * p )
     for (j = 0; j < i; j++) {
         
         if ((int)ptr == arr[j]) {
-            printf("You already freed this memory\n");
+            printf("ERROR, Has not been malloc or freed already\n");
             return;
         }
     }
