@@ -111,6 +111,14 @@ my_free( void * p )
 
     root = temp;
     
+    int j;
+    for (j = 0; j < i; j++) {
+        
+        if ((int)ptr == arr[j]) {
+            printf("You already freed this memory\n");
+            return;
+        }
+    }
     if (root == ptr) {
         printf("fuck yeah\n");
     }
@@ -133,7 +141,7 @@ my_free( void * p )
 	{
         printf("test1\n");
 		printf( "BKR freeing block %#x.\n", p );
-        arr[i++] = (int)ptr + 24;
+        arr[i++] = (int)ptr;
 		ptr->isfree = 1;
 		pred = ptr;
 	}
@@ -148,7 +156,7 @@ my_free( void * p )
 			succ->succ->prev=pred;
 		//end addedw		
 		printf( "BKR freeing block %#x merging with successor new size is %d.\n", p, pred->size );
-        arr[i++] = (int)ptr + 24;
+        arr[i++] = (int)ptr;
         printf("shaving off last two %#x\n", arr[(i-1)]);
         
 	}
