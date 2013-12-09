@@ -6,6 +6,15 @@ static struct MemEntry *	last = 0;
 void *arr[5000];
 static int i = 0;
 
+void remove_from_arr(MemEntry *p){
+	int j;
+	for(j=0;j<i;j++){
+		if(p == arr[j]){
+			arr[j]= NULL;
+			return;
+		}
+	}
+}
 
 void *
 my_malloc( unsigned int size )
@@ -28,6 +37,7 @@ my_malloc( unsigned int size )
 		else if ( p->size < (size + sizeof(struct MemEntry)) )
 		{
 			p->isfree = 0;					// too small to chop up
+			remove(p);
 			return (char *)p + sizeof(struct MemEntry);
 		}
 		else
@@ -46,6 +56,7 @@ my_malloc( unsigned int size )
 			p->size = size;
 			p->isfree = 0;
 			last = (p == last) ? succ : last;
+			remove(p);
 			return (char *)p + sizeof(struct MemEntry);
 		}
 	}

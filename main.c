@@ -20,5 +20,8 @@ int main(int argc, char **argv) {
     int y;
     free(&y);
 
+    char *t = malloc(4);
+    free(t);
+
     return 1;
 }

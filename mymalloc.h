@@ -29,7 +29,6 @@ struct MemEntry {
 
 void *my_malloc(unsigned int size);
 void my_free(void *ptr);
-void segfault_sigaction(int signal, siginfo_t *si, void *arg);
-
+void remove_from_arr(MemEntry *p);
 
 #endif
